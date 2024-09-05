@@ -74,6 +74,10 @@ color: ${props => props.theme["gray-100"]};
 
 export const TaskInput = styled(BaseInput)`
 flex: 1;
+appearance: none;
+&::-webkit-calendar-picker-indicator {
+    display: none !important;
+}
 `
 
 export const MinutesAmountInput = styled(BaseInput)`
