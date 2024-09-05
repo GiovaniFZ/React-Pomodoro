@@ -29,6 +29,7 @@ a{
 
     &.active{
         color: ${(props) => props.theme["green-500"]};
+        box-shadow: none;
     }
 }
 
