@@ -3,7 +3,8 @@ import { CountdownContainer, FormContainer, HomeContainer, MinutesAmountInput, S
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from 'zod'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { differenceInSeconds } from "date-fns";
 
 export function Home() {
     const newcCycleFormSchema = zod.object({
@@ -15,7 +16,8 @@ export function Home() {
     interface Cycle {
         id: string,
         task: string,
-        minutesAmount: number
+        minutesAmount: number,
+        startDate: Date
     }
 
     const [cycles, setCycles] = useState<Cycle[]>([]);
@@ -35,7 +37,8 @@ export function Home() {
         const newCycle: Cycle = {
             id,
             task: data.task,
-            minutesAmount: data.minutesAmount
+            minutesAmount: data.minutesAmount,
+            startDate: new Date()
         }
         setCycles((state) => [...state, newCycle]);
         setActiveCycleId(id);
@@ -43,6 +46,14 @@ export function Home() {
     }
 
     const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
+
+    useEffect(() => {
+        if(activeCycle){
+            setInterval(() => setAmountSecondsPassed(differenceInSeconds(new Date(), activeCycle.startDate)))
+        }
+    }, [activeCycle])
+
+
     const totalSeconds = activeCycle ? activeCycle.minutesAmount*60 : 0;
     const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
 
