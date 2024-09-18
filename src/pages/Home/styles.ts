@@ -84,12 +84,10 @@ export const MinutesAmountInput = styled(BaseInput)`
 width: 4rem;
 `
 
-export const StartCountdownButton = styled.button`
-background-color: ${props => props.theme["green-500"]};
+export const BaseCountdownButton = styled.button`
 width: 100%;
 border-radius: 8px;
 border: 0px;
-color: ${props => props.theme["gray-100"]};
 padding: 1rem;
 display: flex;
 justify-content: center;
@@ -97,14 +95,24 @@ align-items: center;
 gap: 0.5rem;
 font-weight: bold;
 cursor: pointer;
-
 &:disabled{
     cursor: not-allowed;
     opacity: 0.7;
 }
+color: ${(props) => props.theme["gray-100"]};
 
+`
+
+export const StartCountdownButton = styled(BaseCountdownButton)`
+background: ${(props) => props.theme['green-500']};
 &:not(:disabled):hover{
-    background-color: ${props => props.theme["green-700"]}
+    background: ${props => props.theme["green-700"]}
 }
+`
 
+export const StopCountdownButton = styled(BaseCountdownButton)` 
+background: ${(props) => props.theme['red-500']};
+&:not(:disabled):hover{
+    background: ${props => props.theme["red-700"]}
+}
 `
