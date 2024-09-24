@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { CountdownContainer, Separator } from "./styles";
-import { CyclesContext } from "../..";
 import { differenceInSeconds } from "date-fns";
+import { CyclesContext } from "../../../../contexts/CycleContext";
 
 /**
  * PROP DRILLING: Ocorre quando temos muitas propriedades APENAS para comunicação 
