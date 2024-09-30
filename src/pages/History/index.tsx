@@ -5,7 +5,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from "date-fns/locale";
 
 export function History() {
-    const {cycles} = useContext(CyclesContext);
+    const { cycles } = useContext(CyclesContext);
 
     return (
         <HistoryContainer>
@@ -22,13 +22,14 @@ export function History() {
                     </thead>
                     <tbody>
                         {cycles.map((cycle) => {
-                            return(
+                            return (
                                 <tr key={cycle.id}>
                                     <td>{cycle.task}</td>
                                     <td>{cycle.minutesAmount} minutos</td>
-                                    <td>{formatDistanceToNow(cycle.startDate, {
-                                        addSuffix: true,
-                                        locale: ptBR,
+                                    <td>
+                                    {formatDistanceToNow(new Date(cycle.startDate), {
+                                    addSuffix: true,
+                                    locale: ptBR,
                                     })}</td>
                                     <td>
                                         {cycle.finishedDate && (
